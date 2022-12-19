@@ -40,11 +40,12 @@ const char* ssid = "For Payment";
 const char* password = "0987654321";
 
 //set the endpoint that data will be dropped
+const String paymentType = "debit";
 const String apikey = "somade_daniel";
-const String servername = "http://192.168.4.2/nfc_payment/backend/recieveReadings/receive.php";
+const String servername = "http://192.168.4.2/nfc_payment/backend/process_payment.php";
 
-//add api key to the name
-const String serverApi = servername + "?apikey=" + String(apikey);
+//add api key and payement type to the endpoint
+const String serverApi = servername + "?apikey=" + String(apikey) + "&paymentType=" + String(paymentType);
 
 ESP8266WebServer server(80);  //--> Server on port 80
 
@@ -80,12 +81,15 @@ void loop() {
   readsuccess = getid();
 
   if (readsuccess) {
+    String UIDresultSend, postData;
+     
+    //when it reads a card, on the led and buzzer
     digitalWrite(ON_Board_LED, LOW);
     digitalWrite(Buzzer, HIGH);
 
-    String UIDresultSend, postData;
-    UIDresultSend = StrUID; //get the id of the card
-    Serial.println(UIDresultSend); //display the id of the card in the serial monitor
+    //get the card number and print it on the screen
+    UIDresultSend = StrUID;  
+    Serial.println(UIDresultSend); 
 
     //concantenate readings with endpoint to send data
     String request = serverApi + "&card_number=" + String(UIDresultSend);
