@@ -36,11 +36,11 @@ char str[32] = "";
 String StrUID;
 
 //-----SSID and Password of the access point you want to create from the system-------//
-const char* ssid = "For Payment";
+const char* ssid = "Credit Account";
 const char* password = "0987654321";
 
 //set the endpoint that data will be dropped
-const String paymentType = "debit";
+const String paymentType = "credit";  //change to debit for debitting account
 const String apikey = "somade_daniel";
 const String servername = "http://192.168.4.2/nfc_payment/backend/process_payment.php";
 
@@ -86,7 +86,7 @@ void loop() {
     //when it reads a card, on the led and buzzer
     digitalWrite(ON_Board_LED, LOW);
     digitalWrite(Buzzer, HIGH);
-
+    
     //get the card number and print it on the screen
     UIDresultSend = StrUID;  
     Serial.println(UIDresultSend); 
@@ -103,6 +103,11 @@ void loop() {
 
     int httpResponseCode = http.GET();   //Send the request
 
+   //off the buzzer and led after 0.5sec, its here so that the microcontroller can send request immediately
+    delay(500);
+    digitalWrite(ON_Board_LED, HIGH);
+    digitalWrite(Buzzer, LOW);
+      
     if(httpResponseCode > 1){
       //diplay response of request from server 
       String payload = http.getString();
@@ -114,9 +119,15 @@ void loop() {
 
     http.end();  //Close connection
 
-    delay(500);
+    //on the buzzer and led for 0.2second after getting response from backend
+    digitalWrite(ON_Board_LED, LOW);
+    digitalWrite(Buzzer, HIGH);
+    delay(200);
     digitalWrite(ON_Board_LED, HIGH);
     digitalWrite(Buzzer, LOW);
+
+    //add a new line
+    Serial.println("");
   }
 }
 
