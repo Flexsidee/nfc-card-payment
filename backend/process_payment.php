@@ -28,11 +28,11 @@
                             echo "Insufficient fund, balance = #".$card_new_balance;
                         }else{
                             $card_new_balance = $card_balance - $amount_to_pay;
-                            updateBalance($conn, $card_number, $card_new_balance, "Payment is successful" );
+                            updateBalance($conn, $card_number, $amount_to_pay, $card_new_balance, "Payment is successful", "1" );
                         }
                     }else{
                         $card_new_balance = $card_balance + $amount_to_pay;
-                        updateBalance($conn, $card_number, $card_new_balance, "Account credidted" );
+                        updateBalance($conn, $card_number, $amount_to_pay, $card_new_balance, "Account credidted", "0" );
                     }
                 }
             }else{
@@ -54,12 +54,13 @@
         
     }
 
-    function updateBalance($dbConn, $cardNumber, $cardBalance, $returnMessage){
+    function updateBalance($dbConn, $cardNumber, $amount, $cardBalance, $returnMessage, $transactionType){
         //update database with new balance
         $update_sql = "UPDATE students_data SET balance='$cardBalance' where card_number='$cardNumber'";
+        $log_update = "INSERT into logs (card_number, transaction_type, amount, balance) VALUEs ('$cardNumber', '$transactionType','$amount', '$cardBalance')";
 
         //check if updating of balance worked
-        if($dbConn->query($update_sql) === TRUE){
+        if($dbConn->query($update_sql) === TRUE && $dbConn->query($log_update) === TRUE){
             echo $returnMessage.", new balance= #".$cardBalance;
         }else{
             echo "Error: ". $update_sql . "<br>" . $dbConn->error;
