@@ -28,11 +28,11 @@
                             echo "Insufficient fund, balance = #".$card_new_balance;
                         }else{
                             $card_new_balance = $card_balance - $amount_to_pay;
-                            updateBalance($conn, $card_number, $amount_to_pay, $card_new_balance, "Payment is successful", "1" );
+                            updateBalance($conn, $card_number, $amount_to_pay, $card_balance, $card_new_balance, "Payment is successful", "1" );
                         }
                     }else{
                         $card_new_balance = $card_balance + $amount_to_pay;
-                        updateBalance($conn, $card_number, $amount_to_pay, $card_new_balance, "Account credidted", "0" );
+                        updateBalance($conn, $card_number, $amount_to_pay, $card_balance, $card_new_balance, "Account credidted", "0" );
                     }
                 }
             }else{
@@ -54,14 +54,14 @@
         
     }
 
-    function updateBalance($dbConn, $cardNumber, $amount, $cardBalance, $returnMessage, $transactionType){
+    function updateBalance($dbConn, $cardNumber, $amount, $previousBalance, $currentBalance, $returnMessage, $transactionType){
         //update database with new balance
-        $update_sql = "UPDATE students_data SET balance='$cardBalance' where card_number='$cardNumber'";
-        $log_update = "INSERT into logs (card_number, transaction_type, amount, balance) VALUEs ('$cardNumber', '$transactionType','$amount', '$cardBalance')";
+        $update_sql = "UPDATE students_data SET balance='$currentBalance' where card_number='$cardNumber'";
+        $log_update = "INSERT into logs (card_number, transaction_type, amount, previous_balance, balance) VALUEs ('$cardNumber', '$transactionType','$amount', '$previousBalance', '$currentBalance')";
 
         //check if updating of balance worked
         if($dbConn->query($update_sql) === TRUE && $dbConn->query($log_update) === TRUE){
-            echo $returnMessage.", new balance= #".$cardBalance;
+            echo $returnMessage.", new balance= #".$currentBalance;
         }else{
             echo "Error: ". $update_sql . "<br>" . $dbConn->error;
         }
