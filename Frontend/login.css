@@ -32,13 +32,28 @@ body {
   background-position: center;
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100vh;
+}
+
+.logo {
+  display: block;
+  font-family: "goodtimes";
+  text-decoration: none;
+  color: rgba(44, 156, 65, 0.8);
+  padding-bottom: 20px;
+}
+
+.logo:hover {
+  color: rgba(44, 156, 65, 1);
+  transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in-out;
 }
 
 .form-box {
   width: 500px;
   background-color: rgba(44, 156, 65, 0.2);
-  margin: 10% auto 0 auto;
+  margin: 0 auto;
   padding: 50px;
   color: white;
   border-radius: 10px;
@@ -74,6 +89,15 @@ body {
   display: flex;
   justify-content: left;
   align-items: center;
+}
+
+.inputs:focus {
+  width: 90%;
+  border: none;
+  outline: none;
+  background: rgba(9, 22, 61, 0.7);
+  border-radius: 50px;
+  color: #fff;
 }
 
 .inputs i {
