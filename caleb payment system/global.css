@@ -1,0 +1,44 @@
+:root {
+  /* fonts */
+  --font-inter: Inter;
+  --font-roboto: Roboto;
+
+  /* font sizes */
+  --font-size-7xs: 5px;
+  --font-size-6xs: 10px;
+  --font-size-5xs: 12px;
+  --font-size-4xs: 14px;
+  --font-size-3xs: 15px;
+  --font-size-2xs: 16px;
+  --font-size-xs: 19px;
+  --font-size-sm: 20px;
+  --font-size-base: 24px;
+  --font-size-lg: 32px;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-green-100: #37da0f;
+  --color-green-200: #0cb454;
+  --color-green-300: rgba(55, 218, 15, 0.2);
+  --color-gray-100: #d9d9d9;
+  --color-gray-200: #07294d;
+  --color-gray-300: #082340;
+  --color-gray-400: rgba(255, 255, 255, 0.1);
+  --color-gray-500: rgba(255, 255, 255, 0.7);
+  --color-gray-600: rgba(0, 0, 0, 0.2);
+  --color-gray-700: rgba(17, 13, 13, 0.53);
+  --color-gray-800: rgba(255, 255, 255, 0.25);
+  --color-gray-900: rgba(0, 0, 0, 0.5);
+  --color-gray-1000: rgba(255, 255, 255, 0.5);
+  --color-gray-1100: rgba(7, 41, 77, 0.5);
+  --color-gray-1200: rgba(217, 217, 217, 0.4);
+  --color-gray-1300: rgba(0, 0, 0, 0.4);
+  --color-black: #000;
+
+  /* border radiuses */
+  --br-xs: 10px;
+  --br-sm: 15px;
+  --br-md: 40px;
+  --br-lg: 50px;
+  --br-xl: 250px;
+}
