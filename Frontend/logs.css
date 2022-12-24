@@ -120,87 +120,50 @@ a {
   padding: 20px 15px;
   background: rgba(168, 241, 182, 0.7);
   color: #04051c;
+  border-bottom: 1px solid #04051c;
 }
 
 .head h1 {
   font-size: 18px;
 }
 
-.main .content h1 {
-  font-size: 14px;
-  margin: 15px 15px 5px 15px;
+.logtable {
+  padding: 30px 50px;
 }
 
-.cards_wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
+table {
+  border-collapse: collapse;
+  width: 900px;
+  height: auto;
+  box-shadow: 2px 2px 12px rgba(9, 22, 61, 0.7);
+  border-radius: 10px;
 }
 
-.cards_wrapper a {
-  padding: 0;
-  margin-bottom: 15px;
-  padding-top: 10px;
+tr {
+  transform: all 0.4s ease-in;
 }
 
-.card {
-  margin: 10px 15px;
-  height: 100px;
-  width: 200px;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: #fff;
-  background: linear-gradient(to top, #54a864, #95b99b);
-  transition: 0.3s ease-in;
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(168, 241, 182, 0.7);
 }
 
-.card h2 {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "poppins";
-  color: #04051c;
-  font-size: 16px;
-  padding: 0 2px;
-}
-
-.card h2 i {
-  font-size: 2rem;
-  padding-right: 20px;
+#header {
+  background: linear-gradient(to top, #10286e, #09163d, #04051c);
   color: aliceblue;
 }
 
-.card p {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 16px;
+#header:hover {
+  transform: scale(1);
+  box-shadow: 1px 1px 6px rgba(9, 22, 61, 0.7);
 }
 
-.card:hover {
-  transform: scale(1.08);
-  transition: 0.3s ease-in;
+tr:hover {
+  transform: scale(1.015);
+  transition: 0.4s ease-in;
   cursor: pointer;
-}
-
-.chartlay {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-row: 1fr;
-  margin: 0;
-  padding: 0;
-}
-
-.charts {
-  padding-top: 0;
-  margin: 0;
-  width: 400px;
-  height: 300px;
-}
-
-.stats h1 {
-  border-top: 1px solid #04051c;
-  padding: 25px 0;
+  background: aliceblue;
+  box-shadow: 2px 2px 12px rgba(9, 22, 61, 0.7);
 }
