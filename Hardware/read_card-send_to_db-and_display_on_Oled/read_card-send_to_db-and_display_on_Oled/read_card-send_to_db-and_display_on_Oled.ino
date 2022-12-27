@@ -2,12 +2,12 @@
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #                                                               #
   #                 Installation :                                      #
   # NodeMCU ESP8266/ESP12E    RFID MFRC522 / RC522                      #
-  #         D4      <---------->   SDA/SS                              #
+  #         D2       <---------->   SDA/SS                              #
   #         D5       <---------->   SCK                                 #
   #         D7       <---------->   MOSI                                #
   #         D6       <---------->   MISO                                #
   #         GND      <---------->   GND                                 #
-  #         D3       <---------->   RST                                 #
+  #         D1       <---------->   RST                                 #
   #         3V/3V3   <---------->   3.3V                                #
   #         D0       <---------->   LED and buzzer pin                  #
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -18,15 +18,30 @@
 #include <ESP8266HTTPClient.h>
 
 //Include the library for the RFID Reader
-#include <SPI.h>
 #include <MFRC522.h>
 
+//needed for both rfid and Oled
+#include <SPI.h>
+
+//include library need for the OLED
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+
 //define the pin numbers
-#define SS_PIN 2 //--> SDA / SS is connected to pinout D4
-#define RST_PIN 5  //--> RST is connected to pinout D3
+#define SS_PIN 4  //--> SDA / SS is connected to pinout D2
+#define RST_PIN 5  //--> RST is connected to pinout D1
 
 #define ON_Board_LED 2  //--> Defining an On Board LED, used for indicators when the process of connecting to a wifi router
 #define Buzzer 16 // D0 pin for the buzzer
+
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+
+// Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
+#define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  //--> Create MFRC522 instance.
 
@@ -55,6 +70,16 @@ void setup() {
   SPI.begin();      //--> Init SPI bus
   
   mfrc522.PCD_Init(); //--> Init MFRC522 card
+
+  // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3D for 128x64
+    Serial.println(F("SSD1306 allocation failed"));
+    for(;;); // Don't proceed, loop forever
+  }
+
+  // Clear the buffer
+  display.clearDisplay();
+  display.display();
 
   delay(500);
   
@@ -112,9 +137,11 @@ void loop() {
       //diplay response of request from server 
       String payload = http.getString();
       Serial.println(payload);
+      display.print(payload);
     }else{
       //display error code is request is not sent
       Serial.print("Error code: "); Serial.print(httpResponseCode);
+      display.print("Error code: "); display.print(httpResponseCode);
     }
 
     http.end();  //Close connection

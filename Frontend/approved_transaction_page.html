@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<h1>Kindly swipe your card at the reader to confirm payment</h1>
+		<p>
+			If payment is successful, you will be redirected back to the payment page
+		</p>
+
+		<script>
+			function sendRequest() {
+				fetch("../backend/confirm_payment_script.php")
+					.then((response) => response.json())
+					.then((data) => {
+						if (data.status === "success") {
+							alert(data.message);
+							window.location.replace("./payment.php");
+						}
+					})
+					.catch((error) => console.error(error))
+			}
+			setInterval(sendRequest, 5000);
+		</script>
+	</body>
+</html>
