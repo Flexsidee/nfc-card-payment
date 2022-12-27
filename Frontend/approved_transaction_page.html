@@ -19,10 +19,10 @@
 					.then((data) => {
 						if (data.status === "success") {
 							alert(data.message);
-							window.location.replace("./payment.php");
+							window.location.replace("./funduser.php");
 						}
 					})
-					.catch((error) => console.error(error))
+					.catch((error) => console.error(error));
 			}
 			setInterval(sendRequest, 5000);
 		</script>

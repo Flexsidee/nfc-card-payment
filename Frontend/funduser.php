@@ -1,6 +1,5 @@
 <?php 
 session_start();
-
 if(isset($_SESSION['username'])){
     $user = $_SESSION['username'];
 ?>
@@ -12,8 +11,8 @@ if(isset($_SESSION['username'])){
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Caleb Payment Service | Logs</title>
-    <link rel="stylesheet" href="./styles/logs.css" />
+    <title>Caleb Payment Service | Fund User</title>
+    <link rel="stylesheet" href="./styles/funduser.css" />
     <script src="https://kit.fontawesome.com/bef2386e82.js" crossorigin="anonymous"></script>
 </head>
 
@@ -52,45 +51,27 @@ if(isset($_SESSION['username'])){
         </div>
         <div class="main">
             <div class="head">
-                <h1>Logs</h1>
+                <h1>Fund User</h1>
             </div>
-            <div class="logtable">
-                <table>
-                    <tr id="header">
-                        <th>S/N</th>
-                        <th>Student Name</th>
-                        <th>Matric Number</th>
-                        <th>Card Number</th>
-                        <th>Transaction Type</th>
-                        <th>Previous Balance</th>
-                        <th>Amount</th>
-                        <th>Current Balance</th>
-                        <th>Time of event</th>
-                    </tr>
-
-                    <?php
-					include "../backend/db_conn.php";
-					$fetch_logs = mysqli_query($conn, "SELECT t1.log_id, t1.card_number, t2.name, t2.matric_number, t1.transaction_type, t1.amount, t1.previous_balance, t1.balance, t1.time FROM `logs`as t1 LEFT JOIN students_data as t2 on t1.card_number = t2.card_number;");
-	
-					$sn = 1;
-					while($res = mysqli_fetch_assoc($fetch_logs)){
-					?>
-                    <tr>
-                        <td><?php echo $sn; ?></td>
-                        <td><?php echo $res['name']; ?></td>
-                        <td><?php echo $res['matric_number']; ?></td>
-                        <td><?php echo $res['card_number']; ?></td>
-                        <td><?php echo ($res['transaction_type'] == '0') ? "Credit" : "Debit" ; ?></td>
-                        <td><?php echo $res['previous_balance']; ?></td>
-                        <td><?php echo $res['amount']; ?></td>
-                        <td><?php echo $res['balance']; ?></td>
-                        <td><?php echo $res['time']; ?></td>
-                    </tr>
-                    <?php $sn ++; } ?>
-                </table>
+            <div class="form-box">
+                <h1>Enter Funding Requirements</h1>
+                <p>User ID</p>
+                <div class="input-box">
+                    <div class="inputs">
+                        <input type="text" placeholder="Enter User ID" />
+                    </div>
+                </div>
+                <p>Payment Made</p>
+                <div class="input-box">
+                    <div class="inputs">
+                        <input type="number" placeholder="Enter Payment Made By User" />
+                    </div>
+                </div>
+                <a href="#"><button type="button" class="login-btn">Fund User</button></a>
             </div>
         </div>
     </div>
+    <script src="users.js"></script>
 </body>
 
 </html>
