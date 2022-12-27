@@ -137,6 +137,7 @@ a {
 	box-shadow: 2px 2px 12px rgba(9, 22, 61, 0.7);
 	border-radius: 10px;
 	align-items: center;
+	padding-bottom: 10px;
 }
 
 .form-box:hover {

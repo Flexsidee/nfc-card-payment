@@ -27,8 +27,8 @@ if(isset($_SESSION['username'])){
                     </a>
                 </li>
                 <li>
-                    <a href="logs.php"><i class="fa-solid fa-book"></i>
-                        <p>Logs</p>
+                    <a href="funduser.php"><i class="fa-solid fa-money-bill-transfer"></i>
+                        <p>Make Payment</p>
                     </a>
                 </li>
                 <li>
@@ -37,8 +37,8 @@ if(isset($_SESSION['username'])){
                     </a>
                 </li>
                 <li>
-                    <a href="funduser.php"><i class="fa-solid fa-money-bill-transfer"></i>
-                        <p>Fund User</p>
+                    <a href="logs.php"><i class="fa-solid fa-book"></i>
+                        <p>Logs</p>
                     </a>
                 </li>
                 <div class="logout">
@@ -51,24 +51,20 @@ if(isset($_SESSION['username'])){
         </div>
         <div class="main">
             <div class="head">
-                <h1>Fund User</h1>
+                <h1>Payment</h1>
             </div>
-            <div class="form-box">
-                <h1>Enter Funding Requirements</h1>
-                <p>User ID</p>
-                <div class="input-box">
-                    <div class="inputs">
-                        <input type="text" placeholder="Enter User ID" />
+            <form action="../backend/process_frontend_transaction.php" method="POST">
+                <div class="form-box">
+                    <h1>Make payment here!</h1>
+                    <p>Debit / Credit Amount</p>
+                    <div class="input-box">
+                        <div class="inputs">
+                            <input type="number" name="amount" placeholder="Enter amount" />
+                        </div>
                     </div>
+                    <button type="submit" class="login-btn">Fund User</button>
                 </div>
-                <p>Payment Made</p>
-                <div class="input-box">
-                    <div class="inputs">
-                        <input type="number" placeholder="Enter Payment Made By User" />
-                    </div>
-                </div>
-                <a href="#"><button type="button" class="login-btn">Fund User</button></a>
-            </div>
+            </form>
         </div>
     </div>
     <script src="users.js"></script>

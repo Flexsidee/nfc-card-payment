@@ -27,8 +27,8 @@ if(isset($_SESSION['username'])){
                     </a>
                 </li>
                 <li>
-                    <a href="logs.php"><i class="fa-solid fa-book"></i>
-                        <p>Logs</p>
+                    <a href="funduser.php"><i class="fa-solid fa-money-bill-transfer"></i>
+                        <p>Make Payment</p>
                     </a>
                 </li>
                 <li>
@@ -37,8 +37,8 @@ if(isset($_SESSION['username'])){
                     </a>
                 </li>
                 <li>
-                    <a href="funduser.php"><i class="fa-solid fa-money-bill-transfer"></i>
-                        <p>Fund User</p>
+                    <a href="logs.php"><i class="fa-solid fa-book"></i>
+                        <p>Logs</p>
                     </a>
                 </li>
                 <div class="logout">
