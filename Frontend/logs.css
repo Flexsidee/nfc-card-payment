@@ -68,9 +68,9 @@ a {
 }
 
 .nav-links li:hover {
-  background: rgba(168, 241, 182, 0.5);
+  background: rgba(44, 156, 65, 0.3);
   border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(168, 241, 182, 0.5);
+  box-shadow: 0 5px 10px rgba(44, 156, 65, 0.3);
   transition: all 0.6s ease-in;
   transition: all 0.6s ease-in-out;
   color: aliceblue;
