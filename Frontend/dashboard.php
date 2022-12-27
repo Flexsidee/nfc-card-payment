@@ -2,6 +2,12 @@
 session_start();
 if(isset($_SESSION['username'])){
     $user = $_SESSION['username'];
+
+	include "../backend/db_conn.php";
+	$fetch_total_users = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS total FROM students_data where matric_number!='Admin'"));
+	$fetch_total_transactions = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS total FROM logs"));
+	$fetch_total_credit = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS total FROM logs where transaction_type='0'"));
+	$fetch_total_debit = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS total FROM logs where transaction_type='1'"));
 ?>
 
 <!DOCTYPE html>
@@ -138,10 +144,28 @@ if(isset($_SESSION['username'])){
                     <a href="users.php">
                         <div class="card">
                             <h2><i class="fa-solid fa-users-viewfinder"></i>Total Users</h2>
-                            <p class="users" id="users">5360</p>
+                            <p class="users" id="users"><?php echo $fetch_total_users['total']; ?></p>
                         </div>
                     </a>
-                    <a href="users.php">
+                    <a href="logs.php">
+                        <div class="card">
+                            <h2><i class="fa-solid fa-address-book"></i>Transactions</h2>
+                            <p class="newLogs" id="newLogs"><?php echo $fetch_total_transactions['total']; ?></p>
+                        </div>
+                    </a>
+                    <a href="newuser.php">
+                        <div class="card">
+                            <h2><i class="fa-solid fa-user-clock"></i>Total Credits</h2>
+                            <p class="newUsers" id="newUsers"><?php echo $fetch_total_credit['total']; ?></p>
+                        </div>
+                    </a>
+                    <a href="newuser.php">
+                        <div class="card">
+                            <h2><i class="fa-solid fa-user-clock"></i>Total Debits</h2>
+                            <p class="newUsers" id="newUsers"><?php echo $fetch_total_debit['total']; ?></p>
+                        </div>
+                    </a>
+                    <!-- <a href="users.php">
                         <div class="card">
                             <h2><i class="fa-solid fa-users-gear"></i>Active Users</h2>
                             <p class="activeUsers" id="activeUsers">3950</p>
@@ -158,16 +182,19 @@ if(isset($_SESSION['username'])){
                             <h2><i class="fa-solid fa-address-book"></i>New Logs</h2>
                             <p class="newLogs" id="newLogs">567</p>
                         </div>
-                    </a>
+                    </a> -->
                 </div>
-                <div class="stats">
+
+                <!-- This is used for the charts -->
+                <!-- 
+				<div class="stats">
                     <h1>Stats</h1>
                 </div>
 
                 <div class="chartlay">
                     <div id="barchart_values" class="charts"></div>
                     <div id="piechart" class="charts"></div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
