@@ -16,7 +16,11 @@ if (isset($_POST) && isset($_POST['password'])) {
             session_start();
             $_SESSION['username']=$rec['matric_number'];
             $_SESSION['logged_in'] = true;
-            header("Location: ../Frontend/dashboard.php");
+            if($rec['name'] == "admin"){
+                header("Location: ../Frontend/dashboard.php");
+            }else{
+                header("Location: ../Frontend/students");
+            }
         } else{
             header("location: ../Frontend/index.php?err=Invalid Login Details!!");
             echo "Invalid login detail";
