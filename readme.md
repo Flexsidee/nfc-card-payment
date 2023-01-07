@@ -12,6 +12,12 @@ The objectives of the system are to:
 - Streamline the payment process for students, making it faster and more efficient.
 - Provide a more convenient and secure way for students to pay for their meals, reducing the need to carry cash on campus.
 
+Languages Used for this projects are:
+
+- Frontend: Html, css and js
+- Backend: PHP and MySQL
+- Microcontroller Programming: Arduino C++
+
 ## PROJECT SETUP
 
 This is divided into two sections;
@@ -44,7 +50,9 @@ Its advisable to use a breadboard to make the connection cleaner.
 | 3v3 | 3v (RFID reader)  
 | GND | GND (RFID reader, led and buzzer)
 
-Here is a picture of the device after been connected [Connection Image](https://drive.google.com/file/d/1ycgYrh7zkykG3e7oijKC9gyrI8ZSAuht/view?usp=sharing)
+Here is a picture of the device after been connected 
+![Connection image](https://user-images.githubusercontent.com/48515473/211169237-5bab1c0f-3c7a-4147-83bc-9f556c92255a.jpeg)
+
 
 ### 2. Software
 
@@ -75,6 +83,8 @@ Thie steps to steps to setup each are explained below:
 
 You connect the microcontroller to a power source of not more than 5v. After doing this the microcontroller will create a Wifi Access point with the name set in the code and the password (ssid in the code: Credit Account, password: 0987654321).
 
+**Note:** You need to put of your firewall for the microcontroller to be able to send data from the microcontroller to the database on the computer
+
 Next thing to do is to navigate to the web application by typing this url http://localhost/{name of the folder you use}/Frontend in your browser
 
 On the web app the first page you see is the login page. You can either login as a student or as a staff (for now admin)
@@ -86,7 +96,24 @@ Use the table below to see login details and roles
 | Admin   | admin    | admin    |
 | Student | 21/8874  | somade   |
 
-**Note:** You need to put of your firewall for the microcontroller to be able to send data from the microcontroller to the database on the computer
+### Login as a staff (or admin)
+After successfull login, the user is redirected to the dashboard page. Other pages in the web app are:
+
+- User Management page: Here a table showing all the students and their details are displayed. A button to create a new user is also added on the page
+- Logs page: This page contains a table showing all the transactions (both credit and debit) in the database which includes; the student name, the card id, amount of transaction, transaction type, account balance and time of transaction
+- Payment page: This is the page used for payment, the steps in making transaction is given below
+   - The staff inputs the amount to be credited or debited, then they are redirected to a page which then instructs them to move the card closer to rfid reader
+   - The system then checks for the card if its registered, also if there is sufficient amount (for debit) then displays an alert that the payment is successful and it redirects the user back to the payment page for another transaction
+
+Here is a screenshot of the payment page 
+![payment page](https://user-images.githubusercontent.com/48515473/211169974-fe4800ce-b52b-48a2-afa7-72334465030d.jpeg)
+
+
+
+### Login as a student
+When logged in as a student, the student can see his/her account balance, see transaction logs and logout. The screenshot of the page is shown below
+![student-view](https://user-images.githubusercontent.com/48515473/211169058-ecbff2bf-58a1-4668-ab5e-33b68801856e.jpg)
+
 
 ## Name of Contributors
 
@@ -105,3 +132,5 @@ Use the table below to see login details and roles
 - George Sophie A.
 - Adesotu Nancy O.
 - Oguafor Michael I.
+
+Thank you for reading through this project. Please note that this is a prototype of our solution and there are certain aspects that can be improved. We welcome contributions and suggestions to improve the system.
