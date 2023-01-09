@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2022 at 01:32 AM
+-- Generation Time: Jan 09, 2023 at 10:24 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,42 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `nfc_payment`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `input_card`
---
-
-CREATE TABLE `input_card` (
-  `id` int(11) NOT NULL,
-  `card_number` varchar(20) NOT NULL,
-  `time_entered` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `input_card`
---
-
-INSERT INTO `input_card` (`id`, `card_number`, `time_entered`) VALUES
-(1, '0', '2022-12-19 14:24:07'),
-(2, '0', '2022-12-19 14:24:09'),
-(3, '0', '2022-12-19 14:24:22'),
-(4, '0', '2022-12-19 14:24:24'),
-(5, '0', '2022-12-19 14:24:29'),
-(6, '333', '2022-12-19 14:25:45'),
-(7, '.C2B1B421.', '2022-12-19 14:26:54'),
-(8, '.C2B1B421.', '2022-12-19 14:27:03'),
-(9, '.C2B1B421.', '2022-12-19 14:27:04'),
-(10, '.C2B1B421.', '2022-12-19 14:28:11'),
-(11, '.E2605021.', '2022-12-19 14:28:48'),
-(12, '.E2605021.', '2022-12-19 14:28:50'),
-(13, '.A1506D26.', '2022-12-19 14:29:08'),
-(14, '.A1506D26.', '2022-12-19 14:29:21'),
-(15, '.C2B1B421.', '2022-12-19 14:29:30'),
-(16, '.A1506D26.', '2022-12-19 14:29:31'),
-(17, '.C2B1B421.', '2022-12-19 14:29:32'),
-(18, '.A1506D26.', '2022-12-19 14:29:33');
 
 -- --------------------------------------------------------
 
@@ -78,16 +42,38 @@ CREATE TABLE `logs` (
 --
 
 INSERT INTO `logs` (`log_id`, `card_number`, `transaction_type`, `amount`, `previous_balance`, `balance`, `time`) VALUES
-(1, 'C2B1B421', 1, 400, 0, 3400, '2022-12-20 23:59:04'),
-(2, 'C2B1B421', 1, 400, 0, 3000, '2022-12-21 00:00:32'),
-(3, 'C2B1B421', 0, 400, 0, 3400, '2022-12-21 00:01:31'),
-(4, 'C2B1B421', 0, 400, 0, 3800, '2022-12-21 00:01:58'),
-(5, 'C2B1B421', 0, 400, 3800, 4200, '2022-12-21 00:21:49'),
-(6, 'C2B1B421', 0, 400, 4200, 4600, '2022-12-21 00:22:20'),
-(7, 'C2B1B421', 0, 400, 4600, 5000, '2022-12-21 00:22:30'),
-(8, 'C2B1B421', 1, 400, 5000, 4600, '2022-12-21 00:24:56'),
-(9, 'C2B1B421', 1, 400, 4600, 4200, '2022-12-21 00:25:01'),
-(10, 'C2B1B421', 1, 400, 4200, 3800, '2022-12-21 00:25:12');
+(1, '71FCD126', 0, 3000, 2000, 5000, '2022-12-27 15:32:55'),
+(2, 'C2B1B421', 0, 2000, 10500, 12500, '2022-12-27 15:54:16'),
+(3, 'C2B1B421', 0, 5000, 12500, 17500, '2022-12-27 16:04:45'),
+(4, 'C2B1B421', 0, 2500, 17500, 20000, '2022-12-29 19:22:32'),
+(5, 'C2B1B421', 0, 5000, 20000, 25000, '2022-12-30 20:32:50'),
+(6, 'C2B1B421', 0, 2000, 25000, 27000, '2023-01-06 11:58:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `payment_id` int(11) NOT NULL,
+  `transaction_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `reads_card` tinyint(1) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`payment_id`, `transaction_id`, `amount`, `reads_card`, `timestamp`) VALUES
+(1, 1672155155, 3000, 1, '2022-12-27 15:32:55'),
+(2, 1672156442, 2000, 1, '2022-12-27 15:54:16'),
+(3, 1672157061, 5000, 1, '2022-12-27 16:04:45'),
+(4, 1672341723, 2500, 1, '2022-12-29 19:22:32'),
+(5, 1672432360, 5000, 1, '2022-12-30 20:32:50'),
+(6, 1673006318, 2000, 1, '2023-01-06 11:58:49');
 
 -- --------------------------------------------------------
 
@@ -101,6 +87,7 @@ CREATE TABLE `students_data` (
   `name` varchar(50) NOT NULL,
   `card_number` varchar(20) NOT NULL,
   `balance` int(5) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -108,24 +95,27 @@ CREATE TABLE `students_data` (
 -- Dumping data for table `students_data`
 --
 
-INSERT INTO `students_data` (`student_id`, `matric_number`, `name`, `card_number`, `balance`, `date_created`) VALUES
-(1, '21/8874', 'Somade Daniel ', 'C2B1B421', 3800, '2022-12-21 00:25:12');
+INSERT INTO `students_data` (`student_id`, `matric_number`, `name`, `card_number`, `balance`, `password`, `date_created`) VALUES
+(1, '21/8874', 'Somade Daniel ', 'C2B1B421', 27000, 'somade', '2023-01-06 11:58:49'),
+(2, 'admin', 'admin', '', 23, 'admin', '2022-12-31 01:42:39'),
+(4, '21/8714', 'Salami Kehinde', '71FCD126', 5000, 'salami', '2022-12-27 15:32:55'),
+(5, '21/93734', 'Shifatu Usman', '36698JLJSD', 0, 'usman', '2022-12-29 18:23:03');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `input_card`
---
-ALTER TABLE `input_card`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `logs`
 --
 ALTER TABLE `logs`
   ADD PRIMARY KEY (`log_id`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`payment_id`);
 
 --
 -- Indexes for table `students_data`
@@ -139,22 +129,22 @@ ALTER TABLE `students_data`
 --
 
 --
--- AUTO_INCREMENT for table `input_card`
---
-ALTER TABLE `input_card`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `students_data`
 --
 ALTER TABLE `students_data`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
