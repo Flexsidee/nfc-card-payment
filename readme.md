@@ -114,6 +114,9 @@ Here is a screenshot of the payment page
 When logged in as a student, the student can see his/her account balance, see transaction logs and logout. The screenshot of the page is shown below
 ![student-view](https://user-images.githubusercontent.com/48515473/211169058-ecbff2bf-58a1-4668-ab5e-33b68801856e.jpg)
 
+## Demo Video of Project
+[Link to watch video](https://drive.google.com/file/d/1a40A5fWsSm5X1-09332ScE1qx9dtEVZq/view?usp=sharing)
+
 
 ## Name of Contributors
 
